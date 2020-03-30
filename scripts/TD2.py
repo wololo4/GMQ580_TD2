@@ -1,13 +1,8 @@
-import sys,os
-import math
-sys.path.append(r'C:\OSGeo4W64\apps\Python37\Lib\site-packages')
-os.environ['PATH'] = r'C:\OSGeo4W64\bin'
-
 from osgeo import ogr, osr
 shpfile = r'../data/geobase_mtl.shp'
 driver = ogr.GetDriverByName('ESRI Shapefile')
 datasource = driver.Open(shpfile)
-layer = datasource.GetLayer()
+layer = datasource.GetLayer(0)
 
 
 feature = layer.GetNextFeature()
