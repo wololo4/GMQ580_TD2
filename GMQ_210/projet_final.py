@@ -1,11 +1,10 @@
 import sys,os
 import math
-sys.path.append(r'C:\OSGeo4W64\apps\Python27\Lib\site-packages')
+sys.path.append(r'C:\OSGeo4W64\apps\Python37\Lib\site-packages')
 os.environ['PATH'] = r'C:\OSGeo4W64\bin'
 
-
 from osgeo import ogr, osr
-shpfile = r'D:\newadresse\newadresse.shp'
+shpfile = 'geobase_mtl.shp'
 driver = ogr.GetDriverByName('ESRI Shapefile')
 datasource = driver.Open(shpfile)
 layer = datasource.GetLayer()
@@ -44,8 +43,8 @@ def coord_adresse(Rue, NoCivique):
 
     return a
 
-Rue = raw_input('Entree le nom de rue :')
-NoCivique = raw_input('Entree le numero civique de la rue :')
+Rue = input('Entree le nom de rue :')
+NoCivique = input('Entree le numero civique de la rue :')
 
 #rue = grenet
 #nocivique  = #12501
@@ -82,8 +81,8 @@ def distance_adresse(valuex,valuey):
 
     return sorted(m)[0]
 
-valuex = float(raw_input('entree votre valeur en lon :'))
-valuey = float(raw_input('entree votre valeur en lat :'))
+valuex = float(input('entree votre valeur en lon :'))
+valuey = float(input('entree votre valeur en lat :'))
 
 point = ogr.Geometry(ogr.wkbPoint)
 point.AddPoint(valuex, valuey)
@@ -102,15 +101,15 @@ print ("2. L'adresse la plus proche")
 print (30 * '-')
 
 
-choice = raw_input('Enter your choice [1-2] : ')
+choice = input('Enter your choice [1-2] : ')
 
 
 choice = int(choice)
 
 
 if choice == 1:
-        print w
+        print (w)
 elif choice == 2:
-        print y
+        print (y)
 else:
         print ("Invalid number. Try again...")
