@@ -4,11 +4,10 @@ sys.path.append(r'C:\OSGeo4W64\apps\Python37\Lib\site-packages')
 os.environ['PATH'] = r'C:\OSGeo4W64\bin'
 
 from osgeo import ogr, osr
-shpfile = r'../data/geobase_mtl.shp'
+shpfile = r'C:\Users\Pierre-Antoine\Documents\École\Session 8 Géomatique\GMQ580\ADRESSE.shp'
 driver = ogr.GetDriverByName('ESRI Shapefile')
 datasource = driver.Open(shpfile)
 layer = datasource.GetLayer(0)
-
 
 feature = layer.GetNextFeature()
 
@@ -22,38 +21,7 @@ transform = osr.CoordinateTransformation(spatialReferenceSRC, spatialReferenceDE
 
 invtransform = osr.CoordinateTransformation(spatialReferenceDEST, spatialReferenceSRC)
 
-
-def coord_adresse(Rue, NoCivique):
-
-    # Rue = 'Grenet'
-    # NoCivique = '#12501'
-
-    a = []
-    b = ''
-    feature = layer.GetNextFeature()
-
-    while feature:
-         if str(feature.GetField('SPECIFIQUE')).lower() == Rue.lower() and str(feature.GetField('TEXTE'))[1:] == NoCivique:
-             geography = feature.GetGeometryRef()
-             geography.Transform(transform)
-             b = feature.GetField('SPECIFIQUE'), feature.GetField('TEXTE'), feature.GetField('ID_ADRESSE'), geography.ExportToWkt()
-             a.append(b)
-             b = ''
-         feature = layer.GetNextFeature()
-
-    return a
-
-Rue = input('Entree le nom de rue :')
-NoCivique = input('Entree le numero civique de la rue :')
-
-#rue = grenet
-#nocivique  = #12501
-
-w = coord_adresse(Rue,NoCivique)
-
-#print w
-
-def distance_adresse(valuex,valuey):
+def adresse_proche(valuex,valuey):
 
     layer.ResetReading()
 
@@ -91,25 +59,6 @@ point.Transform(invtransform)
 #valuex = 287000
 #valuey = 5040000
 
-y = distance_adresse(point.GetX(),point.GetY())
+adresse = adresse_proche(point.GetX(),point.GetY())
 
-print (30 * '-')
-print ("   M A I N - M E N U")
-print (30 * '-')
-print ("1. Les coordonnee de l'adresse")
-print ("2. L'adresse la plus proche")
-print (30 * '-')
-
-
-choice = input('Enter your choice [1-2] : ')
-
-
-choice = int(choice)
-
-
-if choice == 1:
-        print (w)
-elif choice == 2:
-        print (y)
-else:
-        print ("Invalid number. Try again...")
+print (adresse)
