@@ -2,6 +2,8 @@ import sys,os
 import math
 sys.path.append(r'C:\OSGeo4W64\apps\Python37\Lib\site-packages')
 os.environ['PATH'] = r'C:\OSGeo4W64\bin'
+os.environ['GDAL_DATA'] = r'C:\OSGeo4W64\share\gdal'
+os.environ['PROJ_LIB'] = r'C:\OSGeo4W64\share\proj'
 
 from osgeo import ogr, osr
 shpfile = r'C:\Users\Pierre-Antoine\Documents\École\Session 8 Géomatique\GMQ580\ADRESSE.shp'
@@ -12,7 +14,7 @@ layer = datasource.GetLayer(0)
 feature = layer.GetNextFeature()
 
 spatialReferenceSRC = osr.SpatialReference()
-spatialReferenceSRC.ImportFromEPSG(2950)
+spatialReferenceSRC.ImportFromEPSG(32188)
 
 spatialReferenceDEST = osr.SpatialReference()
 spatialReferenceDEST.ImportFromEPSG(4326)
