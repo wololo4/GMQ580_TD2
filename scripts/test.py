@@ -14,7 +14,7 @@ layer = datasource.GetLayer(0)
 feature = layer.GetNextFeature()
 
 spatialReferenceSRC = osr.SpatialReference()
-spatialReferenceSRC.ImportFromEPSG(32188)
+spatialReferenceSRC.ImportFromEPSG(2950)
 
 spatialReferenceDEST = osr.SpatialReference()
 spatialReferenceDEST.ImportFromEPSG(4326)
@@ -52,8 +52,8 @@ def adresse_proche(valuex,valuey):
 
     return sorted(m)[0]
 
-valuex = float(input('entree votre valeur en lon :'))
-valuey = float(input('entree votre valeur en lat :'))
+valuex = float(287000)
+valuey = float(5040000)
 
 point = ogr.Geometry(ogr.wkbPoint)
 point.AddPoint(valuex, valuey)
