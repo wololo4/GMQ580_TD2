@@ -39,7 +39,6 @@ def adresse_proche(valuex,valuey):
         distance = ((valeur[0] - valuex)**2 + (valeur[1] - valuey)**2)**0.5
         if distancemin > distance:
             geography = feature.GetGeometryRef()
-            geography.Transform(transform)
             distancemin = distance
             valeurmin = valeur
             nociv = feature.GetField('TEXTE')
@@ -52,6 +51,14 @@ def adresse_proche(valuex,valuey):
 
     return sorted(m)[0]
 
+def createBuffer(point):
+
+    bufferDist = 1000
+    test = str(point)
+    pt = ogr.CreateGeometryFromWkt(test)
+    poly = pt.Buffer(bufferDist)
+    return poly
+
 valuex = float(input('entree votre valeur en lon :'))
 valuey = float(input('entree votre valeur en lat :'))
 
@@ -63,4 +70,7 @@ point.AddPoint(valuex, valuey)
 
 adresse = adresse_proche(point.GetX(),point.GetY())
 
+tampon = createBuffer(point)
+
 print (adresse)
+print (tampon)
