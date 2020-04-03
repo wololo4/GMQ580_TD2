@@ -55,11 +55,11 @@ def adresse_proche(valuex,valuey):
 valuex = float(input('entree votre valeur en lon :'))
 valuey = float(input('entree votre valeur en lat :'))
 
-point = ogr.Geometry(ogr.wkbPoint)
-point.AddPoint(valuex, valuey)
-
 #valuex = 287000
 #valuey = 5040000
+
+point = ogr.Geometry(ogr.wkbPoint)
+point.AddPoint(valuex, valuey)
 
 adresse = adresse_proche(point.GetX(),point.GetY())
 
