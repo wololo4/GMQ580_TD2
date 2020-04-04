@@ -62,6 +62,21 @@ def createBuffer(point):
 valuex = float(input('entree votre valeur en lon :'))
 valuey = float(input('entree votre valeur en lat :'))
 
+def nombre_adresse():
+    layer.ResetReading()
+
+    feature = layer.GetNextFeature()
+    m = []
+    intersection = ''
+    for feature in layer:
+        geom_adr = feature.GetGeometryRef()
+        tampon2 = ogr.CreateGeometryFromWkt(tampon)
+        if geom_adr.Intersect(tampon2):
+            intersection = geom_adr.Intersection(tampon2)
+            m.append(intersection)
+            intersection = ''
+    return (len(m))
+
 #valuex = 287000
 #valuey = 5040000
 
@@ -70,7 +85,10 @@ point.AddPoint(valuex, valuey)
 
 adresse = adresse_proche(point.GetX(),point.GetY())
 
-tampon = createBuffer(point)
+tampon = str(createBuffer(point))
+
+nombre = nombre_adresse()
 
 print (adresse)
 print (tampon)
+print (nombre)
