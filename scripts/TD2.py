@@ -24,17 +24,6 @@ feature_add = layer_add.GetNextFeature()
 feature_rou = layer_rou.GetNextFeature()
 feature_qua = layer_qua.GetNextFeature()
 
-#definition de la projection
-spatialReferenceSRC = osr.SpatialReference()
-spatialReferenceSRC.ImportFromEPSG(32188)
-
-spatialReferenceDEST = osr.SpatialReference()
-spatialReferenceDEST.ImportFromEPSG(4326)
-
-transform = osr.CoordinateTransformation(spatialReferenceSRC, spatialReferenceDEST)
-
-invtransform = osr.CoordinateTransformation(spatialReferenceDEST, spatialReferenceSRC)
-
 #fonction qui retourne l'adresse la plus proche
 def adresse_proche(valuex,valuey):
 
